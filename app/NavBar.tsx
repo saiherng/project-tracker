@@ -24,24 +24,27 @@ const NavBar = () => {
     ]
 
     return (
-    <nav className="flex space-x-6 items-center bg-slate-700  p-5 mb-5 h-20 border-b">
-        <Link href="/" className='text-stone-200'><LuBugPlay /></Link>
-        <ul className='flex space-x-6'>
+        
+            <nav className="flex space-x-6 items-center bg-slate-700  p-5 mb-5 h-20 border-b">
+                <Link href="/" className='text-stone-200'><LuBugPlay /></Link>
+                <ul className='flex space-x-6'>
 
-            {links.map(link => 
-            <Link key={link.href} 
-                className={
-                    classnames({
-                        "text-sky-600": link.href === currentPath,
-                        "text-stone-200": link.href !== currentPath,
-                        "hover:text-sky-500": true,
-                    })
-                }  href={link.href}>{link.label}</Link>)}
+                    {links.map(link => 
+                    <Link key={link.href} 
+                        className={
+                            classnames({
+                                "text-sky-600": link.href === currentPath,
+                                "text-stone-200": link.href !== currentPath,
+                                "hover:text-sky-500": true,
+                            })
+                        }  href={link.href}>{link.label}</Link>)}
 
 
-            
-        </ul>
-    </nav>
+                    
+                </ul>
+            </nav>
+        
+    
   )
 }
 
