@@ -6,23 +6,23 @@ interface Props {
     params: {id: string}
 }
 
-export default async function IssueDetailPage({ params }: Props) {
+const IssueDetailPage = async ({params} : Props) => {
 
-  if (typeof params.id !== 'number') notFound();
-  
   const issue = await prisma.issue.findUnique({
-    where: { id: parseInt(params.id) },
+    where: { id: parseInt(params.id)}
   });
 
   if (!issue) notFound();
 
+
   return (
     <div>
-      <p>{issue.title}</p>
-      <p>{issue.description}</p>
-      <p>{issue.status}</p>
-      <p>{issue.createdAt.toDateString()}</p>
+        <p>{issue.title}</p>
+        <p>{issue.description}</p>
+        <p>{issue.status}</p>
+        <p>{issue.createdAt.toDateString()}</p>
     </div>
-  );
+  )
 }
 
+export default IssueDetailPage
