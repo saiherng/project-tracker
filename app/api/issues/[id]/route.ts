@@ -4,41 +4,40 @@ import { issueSchema } from "@/app/schemaValidations";
 import { prisma } from "@/prisma/client";
 
 interface Props {
-  params: {id : string};
+  params: Promise<{id : string}>;
 };
 
 
-export async function PATCH(
-    request : NextRequest, 
-    {params} : Props) {
+export async function PATCH(request : NextRequest, props: Props) {
+  const params = await props.params;
 
-    const body = await request.json();
-    const validation = issueSchema.safeParse(body)
+  const body = await request.json();
+  const validation = issueSchema.safeParse(body)
 
-    if (!validation.success)
-        return NextResponse.json(validation.error.format(), {status:400})
-
+  if (!validation.success)
+      return NextResponse.json(validation.error.format(), {status:400})
 
 
-    const issue = await prisma.issue.findUnique({
-        where : {id : parseInt(params.id)}
-    })
+
+  const issue = await prisma.issue.findUnique({
+      where : {id : parseInt(params.id)}
+  })
 
 
-    if (!issue) 
-        return NextResponse.json({error: 'Invalid Issue'}, {status:404});
+  if (!issue) 
+      return NextResponse.json({error: 'Invalid Issue'}, {status:404});
 
 
-    const updatedIssue = await prisma.issue.update({
-        where: {
-          id: issue.id
-        },
-        data: {
-          title: body.title,
-          description: body.description,
-        },
-      });
+  const updatedIssue = await prisma.issue.update({
+      where: {
+        id: issue.id
+      },
+      data: {
+        title: body.title,
+        description: body.description,
+      },
+    });
 
-      
-    return NextResponse.json(updatedIssue)
-    }
+
+  return NextResponse.json(updatedIssue)
+}

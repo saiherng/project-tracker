@@ -4,10 +4,11 @@ import { prisma } from '@/prisma/client'
 import { notFound } from 'next/navigation'
 
 interface Props {
-  params : {id:string}
+  params : Promise<{id:string}>
 }
 
-const EditIssuePage = async ({params}: Props) => {
+const EditIssuePage = async (props: Props) => {
+  const params = await props.params;
 
   const issueId = parseInt(params.id, 10);
 

@@ -8,10 +8,11 @@ import IssueDetails from './IssueDetails';
 
 
 interface Props {
-    params: {id: string}
+    params: Promise<{id: string}>
 }
 
-const IssueDetailPage = async ({params} : Props) => {
+const IssueDetailPage = async (props: Props) => {
+  const params = await props.params;
 
   const issue = await prisma.issue.findUnique({
     where: { id: parseInt(params.id)}

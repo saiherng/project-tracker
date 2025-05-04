@@ -1,9 +1,7 @@
 'use client';
 
-import { link } from 'fs';
-import Link from 'next/link'
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import React from 'react'
 
 import { LuBugPlay } from "react-icons/lu";
 
@@ -15,20 +13,17 @@ const NavBar = () => {
     //console.log(currentPath);
 
 
-    
-
     const links = [
         {label: "Dashboard", href: "/"},
         {label: "Issues", href: "/issues"},
 
     ]
-
     return (
         
             <nav className="flex space-x-6 items-center bg-slate-700  p-5 mb-5 h-20 border-b">
                 <Link href="/" className='text-stone-200'><LuBugPlay /></Link>
+                
                 <ul className='flex space-x-6'>
-
                     {links.map(link => 
                     <Link key={link.href} 
                         className={

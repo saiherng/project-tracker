@@ -52,6 +52,7 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
       } catch (error) {
         setSubmitting(false);
         setError('Unexpected Error Occured!');
+        console.error(error);
       }
 
       });
