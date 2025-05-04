@@ -15,10 +15,8 @@ const EditIssuePage = async ({params}: Props) => {
     return notFound();
   }
 
-
   const issue = await prisma.issue.findUnique({
     where: {id: issueId}
-
   });
 
   if (!issue) return notFound();

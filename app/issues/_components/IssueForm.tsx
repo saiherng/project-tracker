@@ -17,14 +17,14 @@ import { useRouter } from 'next/navigation';
 
 import { ErrorMessage, Spinner } from '@/app/components';
 
-import { createIssueSchema } from '@/app/schemaValidations';
+import { issueSchema } from '@/app/schemaValidations';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Issue } from '@/app/generated/prisma';
 
 
 const SimpleMDE = dynamic(() => import('react-simplemde-editor'), { ssr: false })
-type IssueFormData = z.infer<typeof createIssueSchema>;
+type IssueFormData = z.infer<typeof issueSchema>;
 
 
 
@@ -32,7 +32,7 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
 
     const router = useRouter();
     const {register, control, handleSubmit, formState: {errors}} = useForm<IssueFormData>(
-      {resolver: zodResolver(createIssueSchema)}
+      {resolver: zodResolver(issueSchema)}
     );
     const [error, setError] = useState('')
     const [isSubmitting, setSubmitting] = useState(false)
