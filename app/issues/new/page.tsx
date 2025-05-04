@@ -15,8 +15,9 @@ import { Controller, useForm } from "react-hook-form";
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
-import ErrorMessagse from '@/app/components/ErrorMessagse';
-import Spinner from '@/app/components/Spinner';
+
+import { ErrorMessage, Spinner } from '@/app/components';
+
 import { createIssueSchema } from '@/app/schemaValidations';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -58,13 +59,13 @@ const NewIssuePage = () => {
           <form className='space-y-3' onSubmit={onSubmit}>
 
             <TextField.Root size="3" placeholder="Title" {...register('title')}/>
-            <ErrorMessagse>{errors.title?.message}</ErrorMessagse>
+            <ErrorMessage>{errors.title?.message}</ErrorMessage>
            
             <Controller name="description" 
             control={control} 
             render={({field}) => <SimpleMDE placeholder="Description" {...field} /> }/>  
            
-            <ErrorMessagse>{errors.description?.message}</ErrorMessagse>
+            <ErrorMessage>{errors.description?.message}</ErrorMessage>
     
             <Button disabled={isSubmitting}> Submit New Issue {isSubmitting && <Spinner/>}</Button>
 

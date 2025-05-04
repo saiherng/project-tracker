@@ -2,10 +2,7 @@ import { Text } from '@radix-ui/themes'
 import React, { PropsWithChildren, ReactNode } from 'react'
 
 
-
-
-
-const ErrorMessagse = ({children} : PropsWithChildren) => {
+const ErrorMessage = ({children} : PropsWithChildren) => {
 
  if (!children) return null;
   return (
@@ -14,4 +11,4 @@ const ErrorMessagse = ({children} : PropsWithChildren) => {
   )
 }
 
-export default ErrorMessagse
+export default ErrorMessage
