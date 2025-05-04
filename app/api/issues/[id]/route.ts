@@ -3,9 +3,14 @@ import { NextRequest, NextResponse } from "next/server";
 import { issueSchema } from "@/app/schemaValidations";
 import { prisma } from "@/prisma/client";
 
+interface Props {
+  params: {id : string};
+};
+
+
 export async function PATCH(
     request : NextRequest, 
-    {params} : { params: {id: string }}) {
+    {params} : Props) {
 
     const body = await request.json();
     const validation = issueSchema.safeParse(body)
@@ -14,9 +19,11 @@ export async function PATCH(
         return NextResponse.json(validation.error.format(), {status:400})
 
 
+
     const issue = await prisma.issue.findUnique({
         where : {id : parseInt(params.id)}
     })
+
 
     if (!issue) 
         return NextResponse.json({error: 'Invalid Issue'}, {status:404});
