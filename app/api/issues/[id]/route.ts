@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { issueSchema } from "@/app/schemaValidations";
 import { prisma } from "@/prisma/client";
+import delay from "delay";
+
 
 interface Props {
   params: Promise<{id : string}>;
@@ -41,6 +43,8 @@ export async function PATCH(request : NextRequest, props: Props) {
 
 export async function DELETE(request : NextRequest, props: Props) {
   
+  await delay(2000);
+
   const params = await props.params;
 
   const issue = await prisma.issue.findUnique({
