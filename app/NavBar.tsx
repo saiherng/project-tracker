@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { LuBugPlay } from "react-icons/lu";
 
 import classnames from 'classnames';
+import { Container, Flex } from '@radix-ui/themes';
 
 const NavBar = () => {
 
@@ -19,24 +20,30 @@ const NavBar = () => {
 
     ]
     return (
-        
-            <nav className="flex space-x-6 items-center bg-slate-700  p-5 mb-5 h-20 border-b">
-                <Link href="/" className='text-stone-200'><LuBugPlay /></Link>
-                
+            <nav className="flex space-x-6 items-center  bg-slate-700  p-5 mb-5 h-20 border-b">
+                <Container>
+                <Flex gap='5' justify='between'>
+                <Link href="/" className='text-stone-200 flex'><LuBugPlay />Project Tracker</Link>
                 <ul className='flex space-x-6'>
                     {links.map(link => 
                     <Link key={link.href} 
                         className={
                             classnames({
-                                "text-sky-600": link.href === currentPath,
+                                "text-gray-400": link.href === currentPath,
                                 "text-stone-200": link.href !== currentPath,
-                                "hover:text-sky-500": true,
+                                "hover:text-yellow-500": true,
                             })
                         }  href={link.href}>{link.label}</Link>)}
 
 
                     
                 </ul>
+                </Flex>
+                
+
+                </Container>
+                
+
             </nav>
         
     
