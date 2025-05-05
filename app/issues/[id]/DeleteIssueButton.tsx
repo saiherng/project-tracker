@@ -1,9 +1,13 @@
 'use client';
 
 import { AlertDialog, Button, Flex } from '@radix-ui/themes'
-
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 const DeleteIssueButton = ({issueId} : {issueId: number}) => {
+
+  const router = useRouter();
+
   return (
     <div>
     <AlertDialog.Root>
@@ -14,17 +18,27 @@ const DeleteIssueButton = ({issueId} : {issueId: number}) => {
 
       <AlertDialog.Content>
         <AlertDialog.Title>Confirm Delete</AlertDialog.Title>
+
         <AlertDialog.Description>
           Are you sure you want to delete this issue? This action cannot be reversed!
         </AlertDialog.Description>
+
         <Flex gap='3' mt='3'>
+
           <AlertDialog.Cancel>
             <Button variant='soft' color='gray' >Cancel</Button>
-            </AlertDialog.Cancel>
+          </AlertDialog.Cancel>
+
           <AlertDialog.Action>
-            <Button variant='soft' color='red' className='rounded'>Confirm Delete</Button>
+            <Button variant='soft' color='red' className='rounded' onClick={ async () => {
+              axios.delete('/api/issues/' + issueId);
+              router.push('/issues');
+              router.refresh()
+            }}>Confirm Delete</Button>
           </AlertDialog.Action>
+
         </Flex>
+
       </AlertDialog.Content>
       </AlertDialog.Root>  
 
