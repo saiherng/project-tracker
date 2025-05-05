@@ -13,14 +13,13 @@ const IssueDetails = ({issue}: Props) => {
   return (
     <div>
     <Heading>{issue.title}</Heading>
-    <Flex className="gap-5" my='2'>
+    <Flex className="space-x-3" my='2'>
       <IssueStatusBadge status={issue.status}/>
       <Text> {issue.createdAt.toDateString()}</Text>
     </Flex>
-    <Card className="prose" mt='5'>
+    <Card className="prose max-w-full" mt='4'>
       <ReactMarkdown >
         {issue.description}
-
       </ReactMarkdown>
     </Card>
     </div>

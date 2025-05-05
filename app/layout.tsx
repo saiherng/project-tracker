@@ -5,7 +5,7 @@ import "@radix-ui/themes/styles.css";
 import './theme-config.css';
 import "./globals.css";
 
-import { Theme } from '@radix-ui/themes'
+import { Container, Theme } from '@radix-ui/themes'
 
 import NavBar from "./NavBar";
 
@@ -32,9 +32,11 @@ export default function RootLayout({
       <Theme accentColor="violet" grayColor="sage" radius="large" scaling="110%">
         
           <NavBar />
-            <main className="p-5">
 
-              {children}
+            <main>
+              <Container>
+                {children}
+                </Container>       
             </main>
             
         </Theme>
