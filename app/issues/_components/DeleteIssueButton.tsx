@@ -1,6 +1,7 @@
 'use client';
 
 import { Spinner } from '@/app/components';
+import { Cross2Icon, CrossCircledIcon } from '@radix-ui/react-icons';
 import { AlertDialog, Button, Flex } from '@radix-ui/themes'
 import axios from 'axios';
 
@@ -35,7 +36,7 @@ const DeleteIssueButton = ({issueId} : {issueId: number}) => {
     <div>
     <AlertDialog.Root>
       <AlertDialog.Trigger>
-        <Button color='red' disabled={isDeleting}> Delete Issue
+        <Button color='red' disabled={isDeleting} ><CrossCircledIcon /> Delete Issue
           {isDeleting && <Spinner/>}
         </Button>
 

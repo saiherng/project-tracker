@@ -20,24 +20,24 @@ const NavBar = () => {
 
     ]
     return (
-            <nav className="flex space-x-6 items-center  bg-slate-700  p-5 mb-5 h-20 border-b">
+            <nav className="flex space-x-6 items-center  bg-slate-700 mb-5 h-20 border-b">
                 <Container>
-                <Flex gap='5' justify='between'>
-                <Link href="/" className='text-stone-200 flex'><LuBugPlay />Project Tracker</Link>
-                <ul className='flex space-x-6'>
-                    {links.map(link => 
-                    <Link key={link.href} 
-                        className={
-                            classnames({
-                                "text-gray-400": link.href === currentPath,
-                                "text-stone-200": link.href !== currentPath,
-                                "hover:text-yellow-500": true,
-                            })
-                        }  href={link.href}>{link.label}</Link>)}
+                <Flex gap='5' justify='start'>
+                <Link href="/" className='text-stone-200 flex'><LuBugPlay /></Link>
+                    <ul className='flex space-x-6'>
+                        {links.map(link => 
+                        <Link key={link.href} 
+                            className={
+                                classnames({
+                                    "text-gray-400": link.href === currentPath,
+                                    "text-stone-200": link.href !== currentPath,
+                                    "hover:text-yellow-500": true,
+                                })
+                            }  href={link.href}>{link.label}</Link>)}
 
 
-                    
-                </ul>
+                        
+                    </ul>
                 </Flex>
                 
 
