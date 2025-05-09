@@ -7,7 +7,7 @@ import { LuBugPlay } from "react-icons/lu";
 
 import { Avatar, Box, Container, DropdownMenu, Flex, Text } from '@radix-ui/themes';
 import classnames from 'classnames';
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import { Skeleton } from '@/app/components';
 
 
@@ -75,7 +75,12 @@ const AuthStatus = () => {
                     <DropdownMenu.Label><Text>{session!.user!.email}</Text></DropdownMenu.Label>
                     <DropdownMenu.Separator />
                     <DropdownMenu.Item color="red">
-                        <Link href='/api/auth/signout'>Sign Out</Link>
+                        <span
+                            onClick={() => signOut({ callbackUrl: '/' })}
+                            className="cursor-pointer"
+                        >
+                            Sign out
+                        </span>
                     </DropdownMenu.Item>
                 </DropdownMenu.Content>
             </DropdownMenu.Root>

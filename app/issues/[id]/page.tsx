@@ -17,7 +17,7 @@ interface Props {
 
 const IssueDetailPage = async (props: Props) => {
   
-  const serverSession = await getServerSession(authOptions);
+  const session = await getServerSession(authOptions);
 
   const params = await props.params;
   
@@ -36,13 +36,13 @@ const IssueDetailPage = async (props: Props) => {
        
       </Box>
 
-      {serverSession && <Box >
+      {session && <Box >
         <Flex gap="3" direction='column' align='start'>
           <EditIssueButton issueId={issue.id} />
           <DeleteIssueButton issueId={issue.id} />
         </Flex>
       </Box>}
-      
+
     </Grid>
 
     </div>
