@@ -64,14 +64,11 @@ const AuthStatus = () => {
     return <Box>
                 <DropdownMenu.Root>
                 <DropdownMenu.Trigger>
-                    {/* <Button variant="soft">
-                    Account 
-                        <DropdownMenu.TriggerIcon/>
-                    </Button> */}
-                    <Avatar src={session!.user!.image!}
-                    fallback='?' size='2' radius='full' 
-                    className='cursor-pointer'
-                    referrerPolicy='no-referrer'>
+                    <Avatar 
+                        src={session!.user!.image!}
+                        fallback='?' size='2' radius='full' 
+                        className='cursor-pointer'
+                        referrerPolicy='no-referrer'>
                     </Avatar>
                 </DropdownMenu.Trigger>
                 <DropdownMenu.Content>

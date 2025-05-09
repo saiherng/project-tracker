@@ -3,6 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { issueSchema } from "@/app/schemaValidations";
 import { prisma } from "@/prisma/client";
 import delay from "delay";
+import { getServerSession } from "next-auth";
+import authOptions from "@/app/auth/authOptions";
 
 
 interface Props {
@@ -11,6 +13,11 @@ interface Props {
 
 
 export async function PATCH(request : NextRequest, props: Props) {
+
+    const session = await getServerSession(authOptions);
+    if (!session)
+        return NextResponse.json({}, {status:401});
+      
   const params = await props.params;
 
   const body = await request.json();
@@ -43,7 +50,9 @@ export async function PATCH(request : NextRequest, props: Props) {
 
 export async function DELETE(request : NextRequest, props: Props) {
   
-  await delay(2000);
+    const session = await getServerSession(authOptions);
+    if (!session)
+        return NextResponse.json({}, {status:401});
 
   const params = await props.params;
 
