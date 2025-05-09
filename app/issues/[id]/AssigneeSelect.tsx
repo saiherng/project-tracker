@@ -28,11 +28,16 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
       (!userId && !issue.assignedToUserId)
     )
       return;
-    axios.patch(`/api/issues/${issue.id}`, {
+     axios
+    .patch(`/xapi/issues/${issue.id}`, {
       assignedToUserId: userId === "unassigned" ? null : userId,
-    }).catch(() => {
-		toast.error('Changes could not be saved.')
-	});
+    })
+    .then(() => {
+      toast.success('Assigned saved successfully.');
+    })
+    .catch(() => {
+      toast.error('Changes could not be saved.');
+    });
   };
 
   return (
