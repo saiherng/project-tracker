@@ -16,8 +16,8 @@ const NavBar = () => {
 
     return (
             <nav className="mb-5 h-18 py-5 border-b">
-                <Container>
-                <Flex gap='5' justify='between'>
+                <Container mx='5'>
+                <Flex gap='5' justify='between' >
                     <Flex align='center' gap='5'>
                         <Link href="/" className='flex'><LuBugPlay /></Link>
                         <NavLinks />

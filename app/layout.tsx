@@ -34,14 +34,13 @@ export default function RootLayout({
         <QueryClientProvider>
         <AuthProvider>
         <Theme accentColor="violet" grayColor="sage" radius="large" scaling="110%">
-        
         <NavBar />
 
+            <Container mx='5'>
           <main>
-            <Container>
               {children}
-              </Container>       
           </main>
+              </Container>       
       </Theme>
         </AuthProvider>
         </QueryClientProvider>
