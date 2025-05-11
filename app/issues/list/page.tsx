@@ -6,13 +6,30 @@ import { prisma } from '@/prisma/client'
 
 import {IssueStatusBadge, Link }from '@/app/components'
 
-
-
 import IssueActions from './IssueActions'
+import { Status } from '@/app/generated/prisma/client';
 
-const IssuesPage = async () => {
 
-  const issues = await prisma.issue.findMany();
+interface Props {
+  searchParams: { status?: string };
+}
+
+const IssuesPage = async ({searchParams} : Props) => {
+
+  const resolvedParams = await searchParams;
+  const rawStatus = resolvedParams.status;
+  const status =
+    rawStatus && rawStatus !== 'ALL' && Object.values(Status).includes(rawStatus as Status)
+      ? (rawStatus as Status)
+      : undefined;
+
+  console.log('Hardcoded status:', status);
+
+  const issues = await prisma.issue.findMany({
+    where : {
+      status : status
+    }
+  });
 
   return (
     <div>
