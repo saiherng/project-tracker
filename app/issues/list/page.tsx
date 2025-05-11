@@ -5,7 +5,6 @@ import { Status } from "@/app/generated/prisma/client";
 import IssueActions from "./IssueActions";
 
 import Pagination from "@/app/components/Pagination";
-import LatestIssues from "@/app/LatestIssues";
 import { Flex } from "@radix-ui/themes";
 import IssueTable, { columnNames, IssueQuery } from "./IssueTable";
 
@@ -47,8 +46,6 @@ const IssuesPage = async ({ searchParams }: Props) => {
 
   return (
     <div>
-      <LatestIssues/>
-
       <Flex direction='column' gap='4'>
         <IssueActions />
         <IssueTable searchParams={searchParams} issues={issues}/>
