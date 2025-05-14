@@ -10,7 +10,7 @@ import IssueTable, { columnNames, IssueQuery } from "./IssueTable";
 import { Metadata } from "next";
 
 interface Props {
-  searchParams: IssueQuery;
+  searchParams: Promise<IssueQuery>;
 }
 
 const IssuesPage = async ({ searchParams }: Props) => {
@@ -49,7 +49,7 @@ const IssuesPage = async ({ searchParams }: Props) => {
     <div>
       <Flex direction='column' gap='4'>
         <IssueActions />
-        <IssueTable searchParams={searchParams} issues={issues}/>
+        <IssueTable searchParams={resolvedParams} issues={issues}/>
         <Pagination pageSize={pageSize} currentPage={page} itemCount={issueCount}/>
       </Flex>
     </div>
