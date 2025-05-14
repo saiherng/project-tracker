@@ -2,7 +2,6 @@ import React from 'react'
 import IssueForm from '../../_components/IssueForm'
 import { prisma } from '@/prisma/client'
 import { notFound } from 'next/navigation'
-import SelectUser from '../../[id]/AssigneeSelect'
 
 interface Props {
   params : Promise<{id:string}>

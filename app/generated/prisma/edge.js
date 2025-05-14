@@ -162,57 +162,14 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
+exports.Prisma.QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+};
+
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
-};
-
-exports.Prisma.IssueOrderByRelevanceFieldEnum = {
-  title: 'title',
-  description: 'description',
-  assignedToUserId: 'assignedToUserId'
-};
-
-exports.Prisma.UserOrderByRelevanceFieldEnum = {
-  id: 'id',
-  name: 'name',
-  username: 'username',
-  email: 'email',
-  image: 'image'
-};
-
-exports.Prisma.AccountOrderByRelevanceFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  type: 'type',
-  provider: 'provider',
-  providerAccountId: 'providerAccountId',
-  refresh_token: 'refresh_token',
-  access_token: 'access_token',
-  token_type: 'token_type',
-  scope: 'scope',
-  id_token: 'id_token',
-  session_state: 'session_state'
-};
-
-exports.Prisma.SessionOrderByRelevanceFieldEnum = {
-  id: 'id',
-  sessionToken: 'sessionToken',
-  userId: 'userId'
-};
-
-exports.Prisma.VerificationTokenOrderByRelevanceFieldEnum = {
-  identifier: 'identifier',
-  token: 'token'
-};
-
-exports.Prisma.AuthenticatorOrderByRelevanceFieldEnum = {
-  credentialID: 'credentialID',
-  userId: 'userId',
-  providerAccountId: 'providerAccountId',
-  credentialPublicKey: 'credentialPublicKey',
-  credentialDeviceType: 'credentialDeviceType',
-  transports: 'transports'
 };
 exports.Status = exports.$Enums.Status = {
   OPEN: 'OPEN',
@@ -266,17 +223,17 @@ const config = {
   "datasourceNames": [
     "db"
   ],
-  "activeProvider": "mysql",
+  "activeProvider": "postgresql",
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "mysql://root:Devkun14~@localhost:3307/project-tracker"
+        "value": "postgresql://postgres.ucjhyddyemofqnspujlh:Ayeparkwar2025~@aws-0-us-west-1.pooler.supabase.com:6543/postgres?pgbouncer=true"
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../app/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"mysql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Issue {\n  id               Int      @id @default(autoincrement())\n  title            String   @db.VarChar(255)\n  description      String   @db.Text\n  status           Status   @default(OPEN)\n  createdAt        DateTime @default(now())\n  updatedAt        DateTime @updatedAt\n  assignedToUserId String?  @db.VarChar(255)\n  asignedToUser    User?    @relation(fields: [assignedToUserId], references: [id])\n}\n\nenum Status {\n  OPEN\n  IN_PROGRESS\n  CLOSED\n}\n\nmodel User {\n  id            String          @id @default(cuid())\n  name          String?\n  username      String?         @unique\n  email         String?         @unique\n  emailVerified DateTime?\n  image         String?\n  accounts      Account[]\n  sessions      Session[]\n  // Optional for WebAuthn support\n  Authenticator Authenticator[]\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  assignedIssues Issue[]\n}\n\nmodel Account {\n  id                       String  @id @default(cuid())\n  userId                   String  @unique\n  type                     String\n  provider                 String\n  providerAccountId        String\n  refresh_token            String? @db.Text\n  access_token             String? @db.Text\n  expires_at               Int?\n  token_type               String?\n  scope                    String?\n  id_token                 String? @db.Text\n  session_state            String?\n  refresh_token_expires_in Int?\n  user                     User?   @relation(fields: [userId], references: [id])\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@unique([provider, providerAccountId])\n  @@index([userId])\n}\n\nmodel Session {\n  id           String   @id @default(cuid())\n  sessionToken String   @unique\n  userId       String\n  expires      DateTime\n  user         User     @relation(fields: [userId], references: [id])\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@index([userId])\n}\n\nmodel VerificationToken {\n  identifier String\n  token      String\n  expires    DateTime\n\n  @@unique([identifier, token])\n}\n\n// Optional for WebAuthn support\nmodel Authenticator {\n  credentialID         String  @unique\n  userId               String\n  providerAccountId    String\n  credentialPublicKey  String\n  counter              Int\n  credentialDeviceType String\n  credentialBackedUp   Boolean\n  transports           String?\n\n  user User @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  @@id([userId, credentialID])\n}\n",
-  "inlineSchemaHash": "f1fa9d08914590fcf287b0de3aa61b50bc9680003f3166a21b7e5570e10e777f",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../app/generated/prisma\"\n}\n\ndatasource db {\n  provider  = \"postgresql\"\n  url       = env(\"DATABASE_URL\")\n  directUrl = env(\"DIRECT_URL\")\n}\n\nmodel Issue {\n  id               Int      @id @default(autoincrement())\n  title            String   @db.VarChar(255)\n  description      String   @db.Text\n  status           Status   @default(OPEN)\n  createdAt        DateTime @default(now())\n  updatedAt        DateTime @updatedAt\n  assignedToUserId String?  @db.VarChar(255)\n  asignedToUser    User?    @relation(fields: [assignedToUserId], references: [id])\n}\n\nenum Status {\n  OPEN\n  IN_PROGRESS\n  CLOSED\n}\n\nmodel User {\n  id            String          @id @default(cuid())\n  name          String?\n  username      String?         @unique\n  email         String?         @unique\n  emailVerified DateTime?\n  image         String?\n  accounts      Account[]\n  sessions      Session[]\n  // Optional for WebAuthn support\n  Authenticator Authenticator[]\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  assignedIssues Issue[]\n}\n\nmodel Account {\n  id                       String  @id @default(cuid())\n  userId                   String  @unique\n  type                     String\n  provider                 String\n  providerAccountId        String\n  refresh_token            String? @db.Text\n  access_token             String? @db.Text\n  expires_at               Int?\n  token_type               String?\n  scope                    String?\n  id_token                 String? @db.Text\n  session_state            String?\n  refresh_token_expires_in Int?\n  user                     User?   @relation(fields: [userId], references: [id])\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@unique([provider, providerAccountId])\n  @@index([userId])\n}\n\nmodel Session {\n  id           String   @id @default(cuid())\n  sessionToken String   @unique\n  userId       String\n  expires      DateTime\n  user         User     @relation(fields: [userId], references: [id])\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@index([userId])\n}\n\nmodel VerificationToken {\n  identifier String\n  token      String\n  expires    DateTime\n\n  @@unique([identifier, token])\n}\n\n// Optional for WebAuthn support\nmodel Authenticator {\n  credentialID         String  @unique\n  userId               String\n  providerAccountId    String\n  credentialPublicKey  String\n  counter              Int\n  credentialDeviceType String\n  credentialBackedUp   Boolean\n  transports           String?\n\n  user User @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  @@id([userId, credentialID])\n}\n",
+  "inlineSchemaHash": "53107486d1457a4c9234860444b82e266f98555ec2856f7219bff3531fb3ea67",
   "copyEngine": true
 }
 config.dirname = '/'

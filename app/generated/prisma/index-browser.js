@@ -190,57 +190,14 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
+exports.Prisma.QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+};
+
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
-};
-
-exports.Prisma.IssueOrderByRelevanceFieldEnum = {
-  title: 'title',
-  description: 'description',
-  assignedToUserId: 'assignedToUserId'
-};
-
-exports.Prisma.UserOrderByRelevanceFieldEnum = {
-  id: 'id',
-  name: 'name',
-  username: 'username',
-  email: 'email',
-  image: 'image'
-};
-
-exports.Prisma.AccountOrderByRelevanceFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  type: 'type',
-  provider: 'provider',
-  providerAccountId: 'providerAccountId',
-  refresh_token: 'refresh_token',
-  access_token: 'access_token',
-  token_type: 'token_type',
-  scope: 'scope',
-  id_token: 'id_token',
-  session_state: 'session_state'
-};
-
-exports.Prisma.SessionOrderByRelevanceFieldEnum = {
-  id: 'id',
-  sessionToken: 'sessionToken',
-  userId: 'userId'
-};
-
-exports.Prisma.VerificationTokenOrderByRelevanceFieldEnum = {
-  identifier: 'identifier',
-  token: 'token'
-};
-
-exports.Prisma.AuthenticatorOrderByRelevanceFieldEnum = {
-  credentialID: 'credentialID',
-  userId: 'userId',
-  providerAccountId: 'providerAccountId',
-  credentialPublicKey: 'credentialPublicKey',
-  credentialDeviceType: 'credentialDeviceType',
-  transports: 'transports'
 };
 exports.Status = exports.$Enums.Status = {
   OPEN: 'OPEN',

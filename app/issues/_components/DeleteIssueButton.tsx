@@ -1,7 +1,7 @@
 'use client';
 
 import { Spinner } from '@/app/components';
-import { Cross2Icon, CrossCircledIcon } from '@radix-ui/react-icons';
+import { CrossCircledIcon } from '@radix-ui/react-icons';
 import { AlertDialog, Button, Flex } from '@radix-ui/themes'
 import axios from 'axios';
 
@@ -26,6 +26,7 @@ const DeleteIssueButton = ({issueId} : {issueId: number}) => {
       router.refresh()
       
     } catch (error) {
+      console.error('Failed to delete issue:', error);
       setDeleting(false);
       setError(true);
     }
