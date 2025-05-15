@@ -1,5 +1,5 @@
 import { prisma } from "@/prisma/client";
-import { Box, Button, Callout, Card, Flex, Grid, Link } from "@radix-ui/themes";
+import { Box, Callout, Text, Flex, Grid, Link } from "@radix-ui/themes";
 import { notFound } from "next/navigation";
 import IssueDetails from "./IssueDetails";
 import EditIssueButton from "../_components/EditIssueButton";
@@ -8,7 +8,7 @@ import { getServerSession } from "next-auth";
 import authOptions from "@/app/auth/authOptions";
 import AssigneeSelect from "./AssigneeSelect";
 import { cache } from "react";
-import { BookmarkIcon, InfoCircledIcon } from "@radix-ui/react-icons";
+import { InfoCircledIcon } from "@radix-ui/react-icons";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -44,7 +44,9 @@ const IssueDetailPage = async (props: Props) => {
         {session && (
           <Box>
             <Flex gap="3" direction="column" align="start">
+              <Text>Assign to User:</Text>
               <AssigneeSelect issue={issue} />
+              
               <EditIssueButton issueId={issue.id} />
               <DeleteIssueButton issueId={issue.id} />
             </Flex>
