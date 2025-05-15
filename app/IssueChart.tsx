@@ -2,7 +2,7 @@
 
 import { Card } from '@radix-ui/themes';
 import React from 'react'
-import { ResponsiveContainer, BarChart, XAxis, YAxis, Bar } from 'recharts';
+import { BarChart, Bar, Rectangle, XAxis, YAxis,Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 interface Props {
     open: number;
@@ -18,13 +18,25 @@ const IssueChart = ({open, inProgress, closed}: Props) => {
     {label: 'Closed', value: closed},
 ]
 
+    const COLORS: Record<string, string> = {
+    Open: '#F87171',          // red
+    'In Progress': '#FBBF24', // yellow
+    Closed: '#34D399',        // green
+  };
+
   return (
     <Card>
         <ResponsiveContainer width='100%' height={300}>
           <BarChart data={data}>
             <XAxis dataKey='label'/>
             <YAxis/>
-            <Bar dataKey='value' barSize={60} style={{fill: 'var(--accent-9)'}}/>
+            <Tooltip />
+            <Legend />
+            <Bar dataKey="value" barSize={60} activeBar={<Rectangle stroke="black" />}>
+            {data.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={COLORS[entry.label]} />
+            ))}
+          </Bar>
           </BarChart>
         </ResponsiveContainer>
     </Card>

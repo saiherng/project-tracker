@@ -25,10 +25,10 @@ const IssueSummary = ({open, inProgress, closed} : Props) => {
     return (
     <Flex gap='5'>
         {containers.map(container =>
-            <Card key={container.label}>
+            <Card key={container.label}  className="group p-4 transition-colors hover:bg-gray-50 cursor-pointer">
                 <Flex direction='column' gap='1'>
-                    <Link href={`/issues/list?status=${container.status}`} className='text-sm font-medium'>{container.label}</Link>
-                    <Text size='5' className='font-bold'>{container.value}</Text>
+                    <Link href={`/issues/list?status=${container.status}`} className="text-sm font-medium group-hover:text-indigo-600 transition-colors">{container.label}</Link>
+                    <Text size='5' className="font-bold group-hover:text-indigo-600 transition-colors">{container.value}</Text>
                 </Flex>
             </Card>
         )}
