@@ -13,7 +13,7 @@ const IssueDetails = ({issue}: Props) => {
   return (
     <div>
     <Heading>{issue.title}</Heading>
-    <Flex className="space-x-3" my='2'>
+    <Flex className="space-x-3" my='3' mb='5'>
       <IssueStatusBadge status={issue.status}/>
       <Text> {issue.createdAt.toDateString()}</Text>
     </Flex>

@@ -16,7 +16,11 @@ const issues = await prisma.issue.findMany({
 })
   return (
     <Card>
-        <Heading size='5' mb='4' mt='2' ml='3'>Latest Issues</Heading>
+        <Flex mb='4' justify='between' align='center' className='p-4'>
+            <Heading size='5'  mt='2'>Latest Issues</Heading>
+            <Link href='/issues/list' className='text-sm underline hover:text-red-500'>View All Issues</Link>
+        </Flex>
+        
         <Table.Root>
         <Table.Body>
             {issues.map( issue => 
